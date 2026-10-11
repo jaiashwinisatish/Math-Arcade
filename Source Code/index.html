@@ -1,0 +1,338 @@
+<!--
+  Project: Math Sprint Game
+  File: index.html
+  Date: February 17, 2026
+  Description: Main HTML structure for the Math Sprint Game.
+
+  Created by: Ashwini Jaiswal & Sharmishtha Khairmode
+  Repository: https://github.com/Amey-Thakur/MATH-SPRINT-GAME
+  License: MIT
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- 
+        Site Metadata checks:
+        Standardized Title and Meta Author tags for Project Attribution.
+    -->
+    <title>ASHWINI & SHARMISHTHA</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <meta name="author" content="Ashwini Jaiswal & Sharmishtha Khairmode">
+
+    <!-- Security Meta Tags -->
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com;">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <link rel="canonical" href="https://amey-thakur.github.io/MATH-SPRINT-GAME/">
+
+    <!-- Dependencies -->
+    <script src="html2canvas.min.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Premium Loading Screen -->
+    <div class="premium-loader">
+        <img src="favicon.png" style="width: 140px; filter: drop-shadow(0 0 20px rgba(10, 132, 255, 0.3)); opacity: 1;">
+        <div class="loader-bar">
+            <div class="loader-fill"></div>
+        </div>
+        <p
+            style="font-family: 'Play', sans-serif; font-size: 13px; text-transform: uppercase; letter-spacing: 3px; color: #bbbbbb; margin: 0; font-weight: 700;">
+            Initializing Game...</p>
+    </div>
+
+    <!-- Script to trigger load finish -->
+    <script>
+        window.addEventListener('load', function () {
+            // Wait for animation to finish significantly
+            setTimeout(function () {
+                document.body.classList.add('loaded');
+            }, 2000);
+        });
+    </script>
+    <div class="game-container">
+        <!-- Header -->
+        <div class="header">
+            <h1>MATH SPRINT GAME</h1>
+        </div>
+
+
+        <!-- splash Page -->
+        <!-- 
+            Game State: Splash Page
+            Initial view where the user selects the difficulty (question count).
+            Uses radio buttons for selection to ensure mutually exclusive options.
+        -->
+        <div class="card" id="splash-page">
+            <section class="progress-dashboard" aria-label="Player progress">
+                <div class="dashboard-heading">
+                    <div>
+                        <p class="eyebrow">YOUR JOURNEY</p>
+                        <h2>Progress dashboard</h2>
+                    </div>
+                    <button class="daily-challenge" id="daily-challenge" type="button">Daily challenge</button>
+                </div>
+                <div class="dashboard-stats">
+                    <div><strong id="player-level">Level 1</strong><span>Current level</span></div>
+                    <div><strong id="player-xp">0 XP</strong><span>Experience</span></div>
+                    <div><strong id="player-coins">0</strong><span>Coins</span></div>
+                    <div><strong id="player-streak">0</strong><span>Best streak</span></div>
+                    <div><strong id="player-accuracy">0%</strong><span>Accuracy</span></div>
+                </div>
+                <div class="dashboard-lower">
+                    <div>
+                        <h3>Achievements</h3>
+                        <div id="achievement-list" class="achievement-list"></div>
+                    </div>
+                    <div>
+                        <h3>Local leaderboard</h3>
+                        <ol id="leaderboard-list" class="leaderboard-list"></ol>
+                    </div>
+                </div>
+            </section>
+            <section class="campaign-panel" aria-label="Campaign levels">
+                <div class="section-heading">
+                    <div>
+                        <p class="eyebrow">20 LEVEL CAMPAIGN</p>
+                        <h2>Choose your challenge</h2>
+                    </div>
+                    <span class="unlock-note">Earn 70% accuracy to unlock the next level</span>
+                </div>
+                <div id="level-grid" class="level-grid"></div>
+            </section>
+            <h2 class="quick-play-heading">Quick play</h2>
+            <form id="start-form">
+                <div class="selection-container">
+                    <!-- 10 Questions radio Input -->
+                    <div class="radio-container">
+                        <label for="value-10">10 Questions</label>
+                        <input type="radio" name="questions" value="10" id="value-10">
+                        <span class="best-score">
+                            <span>Best Score</span>
+                            <span class="best-score-value"></span>
+                        </span>
+                    </div>
+
+                    <!-- 25 Questions radio Input -->
+                    <div class="radio-container">
+                        <label for="value-25">25 Questions</label>
+                        <input type="radio" name="questions" value="25" id="value-25">
+                        <span class="best-score">
+                            <span>Best Score</span>
+                            <span class="best-score-value"></span>
+                        </span>
+                    </div>
+
+                    <!-- 50 Questions radio Input -->
+                    <div class="radio-container">
+                        <label for="value-50">50 Questions</label>
+                        <input type="radio" name="questions" value="50" id="value-50">
+                        <span class="best-score">
+                            <span>Best Score</span>
+                            <span class="best-score-value"></span>
+                        </span>
+                    </div>
+
+                    <!-- 99 Questions radio Input -->
+                    <div class="radio-container">
+                        <label for="value-99">99 Questions</label>
+                        <input type="radio" name="questions" value="99" id="value-99">
+                        <span class="best-score">
+                            <span>Best Score</span>
+                            <span class="best-score-value"></span>
+                        </span>
+                    </div>
+                </div>
+                <!-- Start Form -->
+                <div class="selection-footer">
+                    <button class="start" type="submit">Start Round</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Countdown Page-->
+
+        <div class="card" id="countdown-page" hidden>
+            <h1 class="countdown"></h1>
+        </div>
+
+        <!-- Game Page -->
+
+        <div class="card" id="game-page" hidden>
+            <div class="game-mode-bar">
+                <span id="game-mode-label">Quick play</span>
+                <span id="streak-display" aria-live="polite">🔥 0 streak</span>
+                <button id="hint-button" class="hint-button" type="button">Hint · 5 coins</button>
+            </div>
+            <p id="hint-message" class="hint-message" aria-live="polite" hidden></p>
+            <!-- Game Stats Bar -->
+            <div class="game-stats-bar">
+                <div class="score-pill right-score" id="right-score">0</div>
+                <div class="timer-display" id="timer-display">Time: 0.0s</div>
+                <div class="score-pill wrong-score" id="wrong-score">0</div>
+            </div>
+            <!-- Timer Display -->
+            <!-- Game Content Wrapper -->
+            <div class="game-content-wrapper">
+                <!-- Selected Item Highlight Bar -->
+                <div class="selected-item"></div>
+                <!-- Item Container -->
+                <div class="item-container" id="item-container"></div>
+
+                <!-- Touch Area -->
+            </div>
+            <!-- Right/Wrong Buttons -->
+            <div class="item-footer">
+                <button class="wrong" id="wrong-btn" onclick="select(false)">Wrong</button>
+                <button class="right" id="right-btn" onclick="select(true)">Right</button>
+            </div>
+        </div>
+
+        <!-- Score Page -->
+        <div class="card" id="score-page" hidden>
+            <!-- Score Container -->
+            <div class="score-container">
+                <h1 class="title">Your Time</h1>
+                <h1 class="final-time"></h1>
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <span class="stat-label">Base Time</span>
+                        <span class="base-time"></span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-label">Penalty</span>
+                        <span class="penalty-time"></span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-label">Best Score</span>
+                        <span class="best-time"></span>
+                    </div>
+                </div>
+                <div class="run-rewards" id="run-rewards" aria-live="polite"></div>
+            </div>
+            <!-- Score Footer -->
+            <div class="score-footer">
+                <button class="play-again score-btn" onclick="replayCurrentRun()" hidden>Replay Round</button>
+                <button class="next-level score-btn" id="next-level-button" onclick="startNextLevel()" hidden>Next Level</button>
+                <button class="menu-btn score-btn" onclick="returnToMenu()" hidden>Back to Menu</button>
+                <button class="share-btn score-btn" onclick="shareScore()" hidden>Share Score</button>
+            </div>
+        </div>
+
+        <!-- The Unified Masterpiece Share Card (Glassmorphic Theme) -->
+        <div id="share-card"
+            style="position: absolute; top: -9999px; left: -9999px; width: 500px; padding: 50px; background: white; color: #333; border-radius: 30px; font-family: 'Play', sans-serif; text-align: center; border: 1px solid rgba(0, 0, 0, 0.1); box-shadow: 0 20px 50px rgba(0,0,0,0.1); overflow: hidden;">
+
+            <!-- Subtle Mathematical Watermark Background -->
+            <div
+                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; opacity: 0.05; color: #000; font-family: 'Play', sans-serif;">
+                <div
+                    style="position: absolute; top: 5%; left: 5%; font-size: 110px; transform: rotate(-15deg); font-weight: 900;">
+                    +</div>
+                <div
+                    style="position: absolute; top: 35%; right: -5%; font-size: 140px; transform: rotate(15deg); font-weight: 900;">
+                    ÷</div>
+                <div
+                    style="position: absolute; bottom: 10%; left: -5%; font-size: 130px; transform: rotate(25deg); font-weight: 900;">
+                    ×</div>
+                <div
+                    style="position: absolute; bottom: 5%; right: 10%; font-size: 100px; transform: rotate(-10deg); font-weight: 900;">
+                    −</div>
+                <div
+                    style="position: absolute; top: 65%; left: 30%; font-size: 90px; transform: rotate(-20deg); font-weight: 900;">
+                    =</div>
+            </div>
+
+            <!-- Content Container to ensure it stays above watermark -->
+            <div style="position: relative; z-index: 1;">
+
+                <!-- Header Section -->
+                <div style="margin-bottom: 35px;">
+                    <h1
+                        style="margin: 0; font-size: 32px; letter-spacing: 2px; font-weight: 800; color: dodgerblue; text-transform: uppercase;">
+                        MATH SPRINT</h1>
+                    <div style="font-size: 14px; color: #666; letter-spacing: 1px; margin-top: 5px; font-weight: bold;">
+                        Pushing the limits of mental math.</div>
+                </div>
+
+                <!-- Score Area -->
+                <div
+                    style="background: rgba(30, 144, 255, 0.05); border: 2px solid rgba(30, 144, 255, 0.1); padding: 40px 20px; border-radius: 25px; margin-bottom: 30px;">
+                    <div
+                        style="font-size: 12px; color: #888; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 10px; font-weight: 700;">
+                        Final Sprint Time</div>
+                    <div id="share-time-value"
+                        style="font-size: 80px; font-weight: 900; color: #222; line-height: 1; margin-bottom: 5px;">0.0s
+                    </div>
+                </div>
+
+                <!-- Stats Bar -->
+                <div style="display: flex; gap: 20px; margin-bottom: 40px; justify-content: center;">
+                    <div
+                        style="background: white; padding: 15px 25px; border-radius: 15px; border: 1px solid #eee; flex: 1;">
+                        <div
+                            style="font-size: 11px; color: #999; text-transform: uppercase; margin-bottom: 5px; letter-spacing: 1px;">
+                            Base Time</div>
+                        <div id="share-base" style="font-size: 22px; font-weight: 700; color: #444;">0.0s</div>
+                    </div>
+                    <div
+                        style="background: white; padding: 15px 25px; border-radius: 15px; border: 1px solid #eee; flex: 1;">
+                        <div
+                            style="font-size: 11px; color: #999; text-transform: uppercase; margin-bottom: 5px; letter-spacing: 1px;">
+                            Penalty</div>
+                        <div id="share-penalty" style="font-size: 22px; font-weight: 700; color: #ff4757;">+0.0s</div>
+                    </div>
+                </div>
+
+                <!-- Creator Spotlight -->
+                <!-- Creator Spotlight -->
+                <div style="padding-top: 30px; border-top: 1px solid #eee;">
+                    <div
+                        style="font-size: 11px; color: #888; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 25px; font-weight: 700;">
+                        A Collaborative Masterpiece By</div>
+
+                    <div style="display: flex; justify-content: center; gap: 15px; margin-bottom: 30px;">
+                        <div
+                            style="padding: 12px 28px; background: dodgerblue; color: white; border-radius: 12px; font-weight: 800; font-size: 16px; box-shadow: 0 10px 20px rgba(30, 144, 255, 0.2);">
+                            Ashwini Jaiswal</div>
+                        <div
+                            style="padding: 12px 28px; background: dodgerblue; color: white; border-radius: 12px; font-weight: 800; font-size: 16px; box-shadow: 0 10px 20px rgba(30, 144, 255, 0.2);">
+                            Sharmishtha Khairmode</div>
+                    </div>
+
+                    <div style="margin-top: 20px;">
+                        <div
+                            style="font-size: 10px; color: #888; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 5px;">
+                            HUMAN MACHINE INTERACTION PROJECT</div>
+                        <div
+                            style="font-size: 14px; color: dodgerblue; font-weight: 900; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 15px;">
+                            MATH SPRINT GAME</div>
+                        <div style="font-size: 11px; color: #666; font-family: monospace; font-weight: bold;">
+                            amey-thakur.github.io/MATH-SPRINT-GAME</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Authorship Footer -->
+        <div class="footer">
+            <canvas id="footer-canvas"></canvas>
+            <h3><span class="footer-intro">Created by</span> <span class="link-left">Ashwini
+                    Jaiswal</span> <span class="math-operator">&</span> <span class="link-right">Sharmishtha
+                    Khairmode</span> <span class="footer-year">2026</span></h3>
+        </div>
+    </div>
+    <!-- Script -->
+    <script src="shuffle.js"></script>
+    <script src="script.js"></script>
+
+</body>
+
+</html>

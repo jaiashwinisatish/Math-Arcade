@@ -1,0 +1,1868 @@
+/*
+  Project: Math Sprint Game
+  File: style.css
+  Date: February 17, 2026
+  Description: Custom styling for the game interface, animations, and responsive layout.
+
+  Created by: Ashwini Jaiswal & Sharmishtha Khairmode
+  Repository: https://github.com/Amey-Thakur/MATH-SPRINT-GAME
+  License: MIT
+*/
+@import url('https://fonts.googleapis.com/css2?family=Play&display=swap');
+
+* {
+  box-sizing: border-box;
+  font-family: 'Play', sans-serif;
+}
+
+/*
+  CSS Variables (Custom Properties):
+  Defined on :root for global scope access.
+  Allows for easy theming and consistent color usage across the application.
+*/
+:root {
+  --primary-color: dodgerblue;
+  --select-color: dodgerblue;
+  --success: rgb(15, 158, 2);
+  --danger: rgb(214, 23, 23);
+}
+
+/*
+  Body Layout:
+  Uses Flexbox (display: flex) to center the game container both vertically and horizontally.
+  'height: 100vh' ensures the body takes up the full viewport height.
+  Background uses a subtle SVG pattern for visual texture.
+*/
+body {
+  margin: 0;
+  font-family: 'Play', sans-serif;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* Anti-Select Protection */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  user-select: none;
+  height: 100dvh;
+  background:
+    radial-gradient(ellipse at 15% 20%, rgba(255, 255, 255, 0.8), transparent 45%),
+    radial-gradient(ellipse at 85% 80%, rgba(196, 181, 253, 0.55), transparent 45%),
+    linear-gradient(135deg, #dbeafe 0%, #e0e7ff 50%, #fce7f3 100%);
+}
+
+.game-container {
+  /* Glassmorphism Effect */
+  background: rgba(255, 255, 255, 0.65);
+  /* Increased opacity slightly for readability */
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 25px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+
+  width: 530px;
+  max-width: 95%;
+  height: 90vh;
+  max-height: 90vh;
+  position: relative;
+  user-select: none;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  /* For rounded corners on children */
+}
+
+.header {
+  background: var(--primary-color);
+  color: white;
+  font-family: 'Play', sans-serif;
+  font-size: 24px;
+  text-shadow: 1px 2px 2px black;
+  letter-spacing: 2px;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card {
+  margin: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  /* Important for nested flex scroll */
+  width: 100%;
+}
+
+/* Game Stats Bar */
+.game-stats-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  margin: 10px auto 0 auto;
+  position: relative;
+  z-index: 10;
+}
+
+.timer-display {
+  background: rgba(0, 0, 0, 0.1);
+  color: black;
+  font-size: 26px;
+  font-weight: bold;
+  padding: 5px 20px;
+  border-radius: 20px;
+  width: fit-content;
+  text-align: center;
+  font-family: 'Play', sans-serif;
+  margin: 0;
+  /* Clear margin since flex wrapper handles it */
+}
+
+.score-pill {
+  background: rgba(0, 0, 0, 0.05);
+  /* Softer glass */
+  font-size: 22px;
+  font-weight: bold;
+  padding: 5px 15px;
+  border-radius: 15px;
+  font-family: 'Play', sans-serif;
+  min-width: 40px;
+  text-align: center;
+}
+
+.right-score {
+  color: var(--success);
+  border: 1px solid rgba(46, 204, 113, 0.3);
+}
+
+.wrong-score {
+  color: var(--danger);
+  border: 1px solid rgba(231, 29, 54, 0.3);
+}
+
+#start-form {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.card[hidden] {
+  display: none;
+}
+
+.progress-dashboard,
+.campaign-panel {
+  margin: 14px auto 4px;
+  width: 94%;
+  padding: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.72);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.62);
+  box-shadow: 0 8px 24px rgba(42, 59, 112, 0.08);
+  animation: panel-arrive 0.45s ease both;
+}
+
+.dashboard-heading,
+.section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.progress-dashboard h2,
+.campaign-panel h2 {
+  margin: 0;
+  color: #202b4c;
+  font-size: 18px;
+}
+
+.eyebrow {
+  margin: 0 0 4px;
+  color: #66749a;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.6px;
+}
+
+.daily-challenge,
+.hint-button {
+  height: auto;
+  min-height: 38px;
+  padding: 8px 12px;
+  border-radius: 12px;
+  background: #6941c6;
+  color: white;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.daily-challenge:disabled,
+.hint-button:disabled {
+  cursor: not-allowed;
+  filter: grayscale(0.35);
+  opacity: 0.62;
+}
+
+.dashboard-stats {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.dashboard-stats > div {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 3px;
+  padding: 8px 5px;
+  border-radius: 11px;
+  background: rgba(226, 235, 255, 0.72);
+  text-align: center;
+}
+
+.dashboard-stats strong {
+  color: #3156a5;
+  font-size: 14px;
+}
+
+.dashboard-stats span {
+  color: #65708b;
+  font-size: 10px;
+}
+
+.dashboard-lower {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 12px;
+}
+
+.dashboard-lower h3 {
+  margin: 0 0 6px;
+  color: #394467;
+  font-size: 12px;
+}
+
+.achievement-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.achievement-badge {
+  padding: 4px 7px;
+  border-radius: 999px;
+  background: #e8eaf1;
+  color: #737b91;
+  font-size: 9px;
+}
+
+.achievement-badge.earned {
+  background: #fff0bd;
+  color: #875c00;
+}
+
+.leaderboard-list {
+  margin: 0;
+  padding-left: 21px;
+  color: #4d5879;
+  font-size: 10px;
+  line-height: 1.55;
+}
+
+.section-heading {
+  align-items: end;
+  margin-bottom: 10px;
+}
+
+.unlock-note {
+  max-width: 155px;
+  color: #64708d;
+  font-size: 10px;
+  text-align: right;
+}
+
+.level-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 7px;
+}
+
+.level-card {
+  display: flex;
+  min-width: 0;
+  height: auto;
+  min-height: 64px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  padding: 7px;
+  border: 1px solid rgba(89, 117, 189, 0.2);
+  border-radius: 11px;
+  background: rgba(255, 255, 255, 0.82);
+  color: #344266;
+  text-align: left;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.level-card:not(:disabled):hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(61, 93, 168, 0.17);
+}
+
+.level-card.locked {
+  color: #98a0b1;
+  background: rgba(228, 231, 238, 0.68);
+}
+
+.level-card.completed {
+  border-color: rgba(15, 158, 2, 0.36);
+  background: rgba(230, 250, 233, 0.85);
+}
+
+.level-number {
+  color: var(--primary-color);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.level-name {
+  overflow: hidden;
+  width: 100%;
+  font-size: 10px;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.level-tier {
+  color: #78829c;
+  font-size: 9px;
+}
+
+.quick-play-heading {
+  margin: 12px auto 2px;
+  color: #344266;
+  font-size: 16px;
+}
+
+#splash-page {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.game-mode-bar {
+  display: flex;
+  min-height: 42px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 16px 0;
+  color: #4c5a7d;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.hint-message {
+  margin: 4px 16px;
+  padding: 8px 10px;
+  border: 1px solid rgba(105, 65, 198, 0.18);
+  border-radius: 10px;
+  background: rgba(241, 235, 255, 0.94);
+  color: #55359a;
+  font-size: 12px;
+  text-align: center;
+}
+
+.run-rewards {
+  width: 90%;
+  margin: 8px auto;
+  color: #4d5879;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.game-toast {
+  position: fixed;
+  z-index: 20;
+  right: 20px;
+  bottom: 20px;
+  max-width: min(420px, calc(100vw - 40px));
+  padding: 13px 18px;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 14px;
+  background: #252b46;
+  box-shadow: 0 12px 32px rgba(20, 24, 42, 0.25);
+  color: white;
+  font-size: 14px;
+  animation: toast-arrive 0.25s ease both;
+}
+
+@keyframes panel-arrive {
+  from { transform: translateY(8px); }
+  to { transform: translateY(0); }
+}
+
+@keyframes toast-arrive {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Splash Page -------------------- */
+.selection-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.radio-container {
+  width: 90%;
+  height: 80px;
+  margin: 15px auto;
+  cursor: pointer;
+  border: 2px solid black;
+  border-radius: 5px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.radio-container:hover {
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.4);
+  transform: scale(1.02);
+}
+
+.radio-container.selected-label,
+.radio-container.selected-label:hover {
+  background: var(--select-color);
+  color: white;
+}
+
+input[type="radio"] {
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  cursor: pointer;
+  z-index: 2;
+  margin: 0;
+}
+
+label {
+  font-size: 26px;
+  margin-left: 20px;
+}
+
+.best-score {
+  position: absolute;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: right;
+  font-size: 16px;
+  pointer-events: none;
+  height: 100%;
+}
+
+.best-score span:last-child {
+  font-size: 22px;
+}
+
+
+
+/* Game Page -------------------------- */
+.height-240 {
+  height: 240px;
+  width: 100%;
+}
+
+.height-500 {
+  height: 500px;
+  width: 100%;
+}
+
+.game-content-wrapper {
+  flex: 1;
+  width: 100%;
+  position: relative;
+  /* Anchor for absolute children */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  /* Spotlight Effect */
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.4) 240px, rgba(0, 0, 0, 1) 240px, rgba(0, 0, 0, 1) 320px, rgba(0, 0, 0, 0.4) 320px, rgba(0, 0, 0, 0.4) 100%);
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.4) 240px, rgba(0, 0, 0, 1) 240px, rgba(0, 0, 0, 1) 320px, rgba(0, 0, 0, 0.4) 320px, rgba(0, 0, 0, 0.4) 100%);
+}
+
+.item-container {
+  height: 100%;
+  width: 100%;
+  overflow-y: hidden;
+  /* Disable manual scroll, allow JS scroll */
+  position: relative;
+  -ms-overflow-style: none;
+  touch-action: none;
+  /* Disable touch scroll */
+  z-index: 2;
+  /* Text above highlight */
+}
+
+.item-container::-webkit-scrollbar {
+  display: none;
+}
+
+.scroll-surface {
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  width: 100%;
+  will-change: transform;
+  /* Optimize for GPU */
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80px;
+  width: 100%;
+  user-select: none;
+}
+
+/* History Colors */
+.item.answered-right h1 {
+  color: var(--success);
+}
+
+.item.answered-wrong h1 {
+  color: var(--danger);
+}
+
+.finished>h1 {
+  opacity: 0.5;
+}
+
+.header {
+  height: 80px;
+  /* Specific height to contain particles */
+  position: relative;
+  display: flex;
+  /* Ensure centering */
+  justify-content: center;
+  align-items: center;
+}
+
+.header h1 {
+  font-size: 50px;
+  position: relative;
+  /* Anchor for particles */
+  z-index: 2;
+}
+
+/* Header Constellation Animation */
+.header {
+  position: relative;
+  overflow: hidden;
+  /* Keep particles inside blue bar */
+}
+
+.header::before,
+.header::after {
+  position: absolute;
+  font-family: 'Play', sans-serif;
+  font-weight: bold;
+  opacity: 0.3;
+  color: rgba(255, 255, 255, 0.5);
+  /* Subtle */
+  font-size: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  /* Vertically center */
+  animation: floatConstellation 6s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.header::before {
+  content: "+ - × ÷";
+  left: 20px;
+  /* Far left of header */
+  letter-spacing: 15px;
+  /* Tighter grouping */
+  animation-delay: 0s;
+}
+
+.header::after {
+  content: "÷ × - +";
+  right: 20px;
+  /* Far right of header */
+  letter-spacing: 15px;
+  /* Tighter grouping */
+  animation-delay: 3s;
+}
+
+/* Clear old h1 pseudos if any */
+.header h1::before,
+.header h1::after {
+  content: none;
+}
+
+@keyframes floatConstellation {
+
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0.4;
+  }
+
+  50% {
+    transform: translateY(-10px) rotate(5deg);
+    opacity: 0.8;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+  }
+}
+
+/* Restore Item Typography */
+.item h1 {
+  font-size: 30px;
+  font-family: 'Play', sans-serif;
+  font-weight: bold;
+  margin: 0;
+}
+
+.equation-grid {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: max-content;
+  gap: clamp(3px, 1.2vw, 8px);
+  justify-items: center;
+  align-items: center;
+  text-align: center;
+  max-width: 100%;
+  padding: 0 8px;
+}
+
+.selected-item {
+  background: var(--select-color);
+  position: absolute;
+  top: 240px;
+  /* Matches the top spacer height */
+  left: 0;
+  width: 100%;
+  /* Fill wrapper width */
+  height: 80px;
+  /* Matches item height */
+  z-index: 1;
+  /* Behind text */
+}
+
+.item-footer,
+.selection-footer {
+  width: 100%;
+  height: 70px;
+  background: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  /* margin-bottom removed */
+}
+
+.item-footer {
+  top: 1px;
+}
+
+button {
+  cursor: pointer;
+  height: 50px;
+  border-radius: 5px;
+  font-size: 25px;
+  color: white;
+  border: none;
+  outline: none;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+button:hover {
+  filter: brightness(110%);
+  transform: scale(1.02);
+}
+
+button:active {
+  transform: scale(0.99);
+}
+
+/* Button Animations */
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+
+  25% {
+    transform: translateX(-5px) rotate(-5deg);
+  }
+
+  50% {
+    transform: translateX(5px) rotate(5deg);
+  }
+
+  75% {
+    transform: translateX(-5px) rotate(-5deg);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulse-green {
+  0% {
+    box-shadow: 0 0 0 0 rgba(15, 158, 2, 0.7);
+  }
+
+  70% {
+    box-shadow: 0 0 0 10px rgba(15, 158, 2, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(15, 158, 2, 0);
+  }
+}
+
+.wrong,
+.right {
+  width: 40%;
+  position: relative;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.05);
+  /* Subtle glass base */
+  border: 2px solid;
+  /* Defined by color below */
+  backdrop-filter: blur(5px);
+  transition: all 0.2s ease;
+}
+
+.wrong {
+  color: var(--danger);
+  border-color: var(--danger);
+  box-shadow: 0 0 10px rgba(231, 29, 54, 0.2);
+  margin-right: 25px;
+  font-weight: bold;
+}
+
+/* Pulse Red for Wrong Button */
+@keyframes pulse-red {
+  0% {
+    box-shadow: 0 0 0 0 rgba(214, 23, 23, 0.7);
+  }
+
+  70% {
+    box-shadow: 0 0 0 10px rgba(214, 23, 23, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(214, 23, 23, 0);
+  }
+}
+
+.wrong:hover {
+  color: white;
+  background: var(--danger);
+  animation: pulse-red 1.5s infinite;
+  /* Replaced shake with pulse */
+  box-shadow: 0 0 20px var(--danger);
+  transform: scale(1.05);
+  /* Match Right button scaling */
+}
+
+.right {
+  color: var(--success);
+  border-color: var(--success);
+  box-shadow: 0 0 10px rgba(46, 204, 113, 0.2);
+  font-weight: bold;
+}
+
+.right:hover {
+  color: white;
+  background: var(--success);
+  animation: pulse-green 1s infinite;
+  box-shadow: 0 0 20px var(--success);
+}
+
+.right:hover {
+  animation: pulse-green 1.5s infinite;
+  box-shadow: 0 0 15px var(--success);
+  transform: scale(1.05);
+}
+
+.right:active {
+  transform: scale(0.95);
+  box-shadow: none;
+}
+
+.start,
+.play-again {
+  width: 90%;
+  background: var(--primary-color);
+}
+
+/* Countdown Page ---------------------- */
+/* Countdown Page ---------------------- */
+.countdown {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  font-size: 100px;
+  user-select: none;
+  cursor: pointer;
+  color: var(--primary-color);
+  /* Updated to match theme */
+  text-shadow: 2px 4px 5px rgba(0, 0, 0, 0.2);
+  /* Added depth */
+  font-weight: bold;
+}
+
+.item-active h1 {
+  color: white !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  transition: color 0.1s ease;
+}
+
+/* Score Page ------------------------ */
+/* Score Page ------------------------ */
+.score-container {
+  height: 65%;
+  /* Increased height usage */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 15px;
+}
+
+.score-container .title {
+  color: var(--primary-color);
+  text-shadow: none;
+  font-size: 2.2rem;
+  /* Restored balance */
+  margin-bottom: 10px;
+}
+
+.final-time {
+  font-size: 5.5rem;
+  /* Better focus */
+  font-weight: bold;
+  margin: 5px 0 20px 0;
+  color: var(--primary-color);
+  text-shadow: 2px 4px 5px rgba(0, 0, 0, 0.1);
+}
+
+.stats-grid {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  /* More breathing room */
+  width: 92%;
+  margin: 10px auto;
+  flex-wrap: wrap;
+}
+
+.stat-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.4);
+  padding: 15px 15px;
+  /* Slightly tighter padding to allow text space */
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  flex: 1;
+  min-width: 140px;
+  /* Increased to prevent wrapping */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  /* Slightly smaller for better fit */
+  color: var(--primary-color);
+  font-weight: 800;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+  margin-bottom: 8px;
+  /* Better separation */
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-align: center;
+  white-space: nowrap;
+  /* Force single line */
+  width: 100%;
+}
+
+.base-time,
+.best-time,
+.penalty-time {
+  font-size: 2.0rem;
+  /* Balanced size */
+  font-weight: bold;
+  color: #1e1b4b;
+  margin: 0;
+  line-height: 1;
+}
+
+.penalty-time {
+  color: var(--danger);
+}
+
+.best-time {
+  color: var(--success);
+}
+
+.score-footer {
+  width: 100%;
+  height: auto;
+  padding: 20px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+  flex-wrap: wrap;
+  /* Better separation */
+  margin-top: auto;
+  margin-bottom: 30px;
+}
+
+/* Score Page Buttons */
+.score-btn {
+  cursor: pointer;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  width: min(180px, 42%);
+  height: 50px;
+  font-size: 1.4rem;
+  font-family: 'Play', sans-serif;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s, background 0.2s;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.score-btn:hover {
+  transform: translateY(-3px);
+  filter: brightness(110%);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.play-again {
+  background: var(--primary-color);
+}
+
+.share-btn {
+  background: white;
+  color: var(--primary-color);
+  border: 2px solid var(--primary-color);
+  margin-left: 15px;
+}
+
+.share-btn:hover {
+  background: #f0f8ff;
+}
+
+
+
+.share-btn:hover {
+  transform: translateY(-3px);
+  background: #f0f8ff;
+}
+
+.next-level {
+  background: #6941c6;
+}
+
+.menu-btn {
+  background: #48536f;
+}
+
+.footer .link-left,
+.footer .link-right {
+  color: var(--primary-color);
+  font-weight: 800;
+  padding: 6px 12px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.55);
+  transition: transform 0.25s ease, background 0.25s ease;
+}
+
+.footer .link-left:hover,
+.footer .link-right:hover {
+  transform: translateY(-2px);
+  background: white;
+}
+
+.footer.hover-right .link-right {
+  color: white;
+}
+
+/* Media Query: Laptop */
+@media screen and (max-width: 1800px) {
+  .game-container {
+    margin-top: 35px;
+  }
+}
+
+/* Media Query: Large Smartphone (Vertical) */
+@media screen and (max-width: 600px) {
+  .game-container {
+    width: 100%;
+    height: 100dvh;
+    max-height: 100dvh;
+    border-radius: 0;
+    margin-top: 0;
+    border: none;
+    box-shadow: none;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    /* Keep hidden, handle scrolling internally */
+  }
+
+  /* Make the card header/footer fixed height, and middle scrollable */
+  .card {
+    flex: 1;
+    overflow: hidden;
+    /* Contain children */
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    /* Crucial for flex scroll */
+  }
+
+  #splash-page {
+    padding-bottom: 12px;
+  }
+
+  .progress-dashboard,
+  .campaign-panel {
+    width: 96%;
+    padding: 12px;
+  }
+
+  .dashboard-stats {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .dashboard-lower {
+    grid-template-columns: 1fr;
+    gap: 9px;
+  }
+
+  .level-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .section-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .unlock-note {
+    max-width: none;
+    text-align: left;
+  }
+
+  .header {
+    height: 60px;
+    padding: 0 10px;
+    /* Add some padding */
+  }
+
+  .header h1 {
+    font-size: 20px;
+    /* Further reduced from 28px to prevent wrapping */
+    letter-spacing: 1px;
+    /* Reduce spacing */
+    width: 100%;
+    text-align: center;
+    white-space: nowrap;
+    /* Force single line if possible */
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .countdown {
+    margin-top: 0;
+    /* Center vertically properly */
+    font-size: 80px;
+  }
+
+  /* Selection Page Adjustments */
+  .selection-container {
+    flex: 1;
+    /* Fill available space */
+    justify-content: flex-start;
+    gap: 10px;
+    padding-top: 10px;
+    overflow-y: auto;
+    /* Scrollable content area */
+    min-height: 0;
+    /* Enable scroll */
+  }
+
+  .radio-container {
+    width: 95%;
+    height: 55px;
+    /* Compact height */
+    margin: 5px auto;
+  }
+
+  label {
+    font-size: 1.3rem;
+  }
+
+  .best-score {
+    margin-right: 10px;
+  }
+
+  .best-score span:first-child {
+    font-size: 11px;
+  }
+
+  .best-score span:last-child {
+    font-size: 16px;
+  }
+
+  .selection-footer {
+    height: 70px;
+    margin-top: auto;
+    /* Push to bottom if space allows, or sit naturally */
+    padding-bottom: 10px;
+  }
+
+  .start {
+    height: 50px;
+    /* Ensure button is reachable */
+  }
+
+  /* Game Page Adjustments */
+  .item h1 {
+    font-size: 24px;
+    /* Smaller equations */
+  }
+
+  .equation-grid {
+    gap: 2px;
+  }
+
+  .timer-display,
+  .score-pill {
+    font-size: 18px;
+    padding: 4px 12px;
+  }
+
+  .item-footer button {
+    font-size: 20px;
+  }
+
+  /* Score Page Adjustments */
+  .final-time {
+    font-size: 4rem;
+    /* Fit screen */
+  }
+
+  .score-container .title {
+    font-size: 1.8rem;
+  }
+
+  .score-container {
+    height: auto;
+    flex: 1;
+    min-height: 0;
+    padding: 10px 0;
+  }
+
+  .stats-grid {
+    gap: 15px;
+    width: 95%;
+  }
+
+  .stat-box {
+    min-width: 100px;
+    padding: 10px;
+  }
+
+  .base-time,
+  .best-time,
+  .penalty-time {
+    font-size: 1.5rem;
+  }
+
+  .score-footer {
+    flex-direction: column;
+    flex: 0 0 auto;
+    gap: 8px;
+    margin: 0 0 8px;
+    padding: 8px 0;
+  }
+
+  .score-btn {
+    width: 85%;
+    height: 40px;
+    font-size: 1.2rem;
+    margin-left: 0;
+    /* Reset margin for share btn */
+  }
+
+  .footer h3 {
+    flex-wrap: wrap;
+    gap: 4px;
+    font-size: 12px;
+  }
+
+  .footer .link-left,
+  .footer .link-right {
+    padding: 4px 6px;
+    font-size: 12px;
+  }
+}
+
+/* Media Query: Landscape Mode (Mobile) */
+@media screen and (max-height: 500px) and (orientation: landscape) {
+  .game-container {
+    height: 100vh;
+    margin-top: 0;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .card#splash-page {
+    width: 100%;
+    min-width: 0;
+    height: auto;
+    flex: 1 1 0%;
+    min-height: 0;
+    justify-content: flex-start;
+    overflow-y: auto;
+  }
+
+  #splash-page .progress-dashboard,
+  #splash-page .campaign-panel,
+  #splash-page .quick-play-heading,
+  #splash-page #start-form {
+    flex: 0 0 auto;
+  }
+
+  .header {
+    width: 100%;
+    height: 40px;
+    flex: 0 0 40px;
+    /* Slim header */
+  }
+
+  .header h1 {
+    font-size: 20px;
+  }
+
+  .card {
+    height: auto;
+    width: 100%;
+    flex: 1 1 0%;
+    /* Let content dictate height */
+    justify-content: center;
+  }
+
+  .selection-container {
+    flex-direction: row;
+    flex-wrap: wrap;
+    top: 0;
+    gap: 10px;
+    padding-top: 10px;
+  }
+
+  .radio-container {
+    width: 45%;
+    /* 2x2 grid */
+    height: 50px;
+    margin: 5px;
+  }
+
+  label {
+    font-size: 1.2rem;
+  }
+
+  .best-score {
+    font-size: 0.8rem;
+  }
+
+  .selection-footer,
+  .item-footer {
+    height: 50px;
+  }
+
+  button {
+    height: 40px;
+    font-size: 18px;
+  }
+
+  /* Game Page compact */
+  .game-content-wrapper {
+    height: calc(100vh - 100px);
+    /* Leave room for header/footer */
+  }
+
+  .item {
+    height: 50px;
+  }
+
+  .item h1 {
+    font-size: 20px;
+  }
+
+  .selected-item {
+    top: 150px;
+    /* Adjust highlight position */
+    height: 50px;
+  }
+
+  .score-container {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
+
+/* Media Query: Small Phones (320px width) */
+@media screen and (max-width: 350px) {
+  .header h1 {
+    font-size: 22px;
+  }
+
+  .level-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .best-score {
+    display: none;
+    /* Hide best score on tiny screens to prevent clutter */
+  }
+
+  .radio-container {
+    height: 60px;
+  }
+
+  label {
+    font-size: 1.2rem;
+  }
+
+  .final-time {
+    font-size: 3rem;
+  }
+
+  .stats-grid {
+    gap: 5px;
+  }
+
+  .stat-box {
+    min-width: 80px;
+    padding: 5px;
+  }
+
+  .base-time,
+  .best-time,
+  .penalty-time {
+    font-size: 1.2rem;
+  }
+}
+
+
+/* Media Query: iPhone */
+@media screen and (max-width: 376px) {
+  .best-score {
+    left: 232px;
+  }
+}
+
+/* Footer ----------------------------- */
+.footer {
+  width: 100%;
+  text-align: center;
+  /* margin-top: auto; handled by gap and flex layout */
+  padding: 10px 0;
+  background: rgba(255, 255, 255, 0.9);
+  position: relative;
+  overflow: hidden;
+  /* Contain the canvas */
+}
+
+#footer-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  /* Let clicks pass through to links */
+  opacity: 0.6;
+}
+
+.footer h3 {
+  position: relative;
+  z-index: 1;
+  /* Ensure text is above canvas */
+  margin: 0;
+  font-size: 16px;
+  color: #333;
+  font-family: 'Play', sans-serif;
+  font-weight: normal;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  /* Space between elements */
+}
+
+.footer a {
+  color: #333;
+  text-decoration: none;
+  font-weight: bold;
+  position: relative;
+  display: inline-block;
+  padding: 5px 15px;
+  /* More padding for hover area */
+  transition: all 0.3s ease;
+  border-radius: 20px;
+  /* Rounded pill shape */
+  background: rgba(255, 255, 255, 0.5);
+  /* Slight box to read text over canvas */
+  backdrop-filter: blur(2px);
+}
+
+.footer a:hover {
+  background: white;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+  color: #333;
+  /* Color handled by particles, keep text clean */
+}
+
+.math-operator {
+  display: inline-block;
+  font-weight: bold;
+  transition: all 0.5s ease;
+  /* Smooth transition for JS changes */
+  font-size: 18px;
+  color: var(--primary-color);
+  /* Animation handled by JS now */
+}
+
+@keyframes pulse-op {
+
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+
+  50% {
+    transform: scale(1.3);
+    opacity: 1;
+    color: var(--success);
+  }
+}
+
+.footer a {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 800;
+  padding: 6px 16px;
+  background: rgba(255, 255, 255, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 12px;
+  /* Matching Page Theme (Buttons) */
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-family: 'Play', sans-serif;
+  font-size: 15px;
+  /* Equalized with intro */
+  display: inline-block;
+}
+
+.footer a:hover {
+  background: rgba(255, 255, 255, 0.8);
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  color: #222;
+}
+
+.footer-intro {
+  text-transform: uppercase;
+  font-size: 15px;
+  /* Equalized with names */
+  letter-spacing: 2px;
+  color: #666;
+  font-weight: bold;
+  font-family: 'Play', sans-serif;
+  margin-right: 5px;
+}
+
+.footer-year {
+  font-family: 'Play', sans-serif;
+  font-weight: bold;
+  opacity: 1;
+  /* Match Created By brightness */
+  font-size: 15px;
+  border-left: 2px solid rgba(0, 0, 0, 0.2);
+  /* Brighter line */
+  padding-left: 15px;
+  margin-left: 10px;
+  color: #666;
+}
+
+/* =========================================
+   INTERACTIVE MATH ENTANGLEMENT
+   ========================================= */
+
+/* =========================================
+   MATH OPS: PARTICLE SYSTEM STYLES
+   ========================================= */
+
+/* Base particle style (created via JS) */
+.math-particle {
+  position: absolute;
+  font-weight: bold;
+  font-size: 20px;
+  pointer-events: none;
+  z-index: 10;
+  opacity: 1;
+  transition: transform 0.8s linear, opacity 0.8s ease-in;
+}
+
+/* Addition Particle (+) */
+.particle-plus {
+  color: var(--primary-color);
+  text-shadow: 0 0 5px var(--primary-color);
+}
+
+/* Multiplication Particle (x) */
+.particle-multiply {
+  color: var(--success);
+  text-shadow: 0 0 5px var(--success);
+}
+
+/* Target Reaction States */
+.scale-up {
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transform: scale(1.3) !important;
+  color: var(--primary-color) !important;
+  text-shadow: 0 0 10px rgba(30, 144, 255, 0.6);
+}
+
+.scale-boost {
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transform: scale(1.3) rotate(5deg) !important;
+  color: var(--success) !important;
+  text-shadow: 0 0 10px rgba(15, 158, 2, 0.6);
+}
+
+/* Operator States */
+.operator-plus {
+  color: var(--primary-color);
+  transform: scale(1.5) rotate(0deg);
+}
+
+.operator-multiply {
+  color: var(--success);
+  transform: scale(1.5) rotate(0deg);
+  /* Text content will be 'x', so no extra rotation needed unless font is '+' */
+}
+
+/* STATE 1: Hovering the left author */
+.footer.hover-left .link-left {
+  background: var(--primary-color) !important;
+  color: white !important;
+  transform: scale(1.1) rotate(-3deg);
+  box-shadow: 0 5px 15px rgba(30, 144, 255, 0.4);
+}
+
+.footer.hover-left .link-right {
+  opacity: 0.6;
+  transform: translateX(-10px) scale(0.9);
+  /* Attracted to left */
+  filter: blur(1px);
+}
+
+.footer.hover-left .math-operator {
+  transform: rotate(360deg) scale(1.5);
+  color: var(--primary-color);
+  content: "+";
+  /* Visual trickery with font needed, or replace char? Text is '&'. Let's rotate it to look like a plus or just spin it wild */
+  /* Since we can't change text content easily with CSS 'content', we'll rely on rotation/scale */
+}
+
+/* Re-orient '&' to look interesting on hover, or rely on JS? 
+   Let's keep it CSS. Rotation 45deg makes it look abstract. */
+.footer.hover-left .math-operator {
+  transform: rotate(45deg) scale(1.3);
+}
+
+
+/* STATE 2: Hovering the right author */
+.footer.hover-right .link-right {
+  background: #8b5cf6 !important;
+  /* Violet */
+  color: white !important;
+  transform: scale(1.1) rotate(3deg);
+  box-shadow: 0 5px 15px rgba(139, 92, 246, 0.4);
+}
+
+.footer.hover-right .link-left {
+  opacity: 0.6;
+  transform: translateX(10px) scale(0.9);
+  /* Attracted to right */
+  filter: blur(1px);
+}
+
+.footer.hover-right .math-operator {
+  transform: rotate(-45deg) scale(1.3);
+  color: #8b5cf6;
+}
+
+/* Pseudo-Element Math Particles */
+.link-left::before,
+.link-left::after,
+.link-right::before,
+.link-right::after {
+  content: "x";
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.4s;
+  font-family: monospace;
+}
+
+/* Left Particles */
+.link-left::before {
+  content: "∫";
+  top: -20px;
+  left: 0;
+}
+
+.link-left::after {
+  content: "dx";
+  bottom: -20px;
+  right: 0;
+}
+
+.footer.hover-left .link-left::before {
+  opacity: 1;
+  transform: translateY(-10px) rotate(-10deg);
+}
+
+.footer.hover-left .link-left::after {
+  opacity: 1;
+  transform: translateY(10px) rotate(10deg);
+}
+
+/* Right Particles */
+.link-right::before {
+  content: "∑";
+  top: -20px;
+  right: 0;
+}
+
+.link-right::after {
+  content: "π";
+  bottom: -20px;
+  left: 0;
+}
+
+.footer.hover-right .link-right::before {
+  opacity: 1;
+  transform: translateY(-10px) rotate(10deg);
+}
+
+.footer.hover-right .link-right::after {
+  opacity: 1;
+  transform: translateY(10px) rotate(-10deg);
+}
+
+/* --- Premium Loading Screen (Apple Style - Dark Mode) --- */
+.premium-loader {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 10, 15, 0.95);
+  /* Deep dark background */
+  backdrop-filter: blur(20px);
+  z-index: 3000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.8s, visibility 0.8s;
+}
+
+.loader-bar {
+  width: 220px;
+  /* Slightly wider */
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  /* Dark mode track */
+  border-radius: 4px;
+  overflow: hidden;
+  margin: 30px 0;
+}
+
+.loader-fill {
+  width: 0;
+  height: 100%;
+  background: #0a84ff;
+  /* Apple Dark Mode Blue */
+  animation: loadFill 2.5s forwards ease-in-out;
+  box-shadow: 0 0 10px rgba(10, 132, 255, 0.5);
+}
+
+@keyframes loadFill {
+  to {
+    width: 100%;
+  }
+}
+
+body.loaded .premium-loader {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* Countdown Animation */
+@keyframes popIn {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+
+  60% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(1.0);
+    opacity: 1;
+  }
+}
+
+.pop-in {
+  animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+/* Penalty Animation */
+@keyframes penaltyShake {
+  0% {
+    transform: translateX(0);
+    color: inherit;
+  }
+
+  25% {
+    transform: translateX(-6px);
+    color: var(--danger);
+  }
+
+  50% {
+    transform: translateX(6px);
+    color: var(--danger);
+  }
+
+  75% {
+    transform: translateX(-4px);
+    color: var(--danger);
+  }
+
+  100% {
+    transform: translateX(0);
+    color: inherit;
+  }
+}
+
+.penalty-flash {
+  animation: penaltyShake 0.4s ease-in-out;
+}
+
+/* Interactive Button Feedback */
+@keyframes flashGreen {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(46, 204, 113, 0);
+  }
+
+  50% {
+    transform: scale(1.1);
+    box-shadow: 0 0 30px var(--success);
+  }
+
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(46, 204, 113, 0);
+  }
+}
+
+@keyframes flashRed {
+  0% {
+    transform: translateX(0);
+    box-shadow: 0 0 0 0 rgba(231, 29, 54, 0);
+  }
+
+  25% {
+    transform: translateX(-5px);
+    box-shadow: 0 0 30px var(--danger);
+  }
+
+  50% {
+    transform: translateX(5px);
+  }
+
+  75% {
+    transform: translateX(-5px);
+  }
+
+  100% {
+    transform: translateX(0);
+    box-shadow: 0 0 0 0 rgba(231, 29, 54, 0);
+  }
+}
+
+.btn-success-flash {
+  /* Force color change via class */
+  background: var(--success) !important;
+  color: white !important;
+  border-color: var(--success) !important;
+  animation: flashGreen 0.4s ease-out forwards;
+}
+
+.btn-error-flash {
+  /* Force color change via class */
+  background: var(--danger) !important;
+  color: white !important;
+  border-color: var(--danger) !important;
+  animation: flashRed 0.4s ease-in-out forwards;
+}

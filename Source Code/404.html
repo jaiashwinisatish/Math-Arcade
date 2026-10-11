@@ -1,0 +1,275 @@
+<!--
+    ================================================================
+    Math Sprint Game - 404 Not Found
+    ================================================================
+    Project: Math Sprint Game
+    Description: Custom 404 error page for the Math Sprint Game
+    
+    Created by: Ashwini Jaiswal & Sharmishtha Khairmode
+    Repository: https://github.com/Amey-Thakur/MATH-SPRINT-GAME
+    License: MIT
+    ================================================================
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 | Equation Not Found</title>
+    <meta name="author" content="Ashwini Jaiswal & Sharmishtha Khairmode">
+    <meta name="description" content="Error: This equation does not compute. Please return to the game.">
+    <meta name="robots" content="noindex, follow">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Play&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary-color: #0275d8;
+            --bg-color: #f0f8ff;
+            --text-primary: #333;
+            --text-secondary: #555;
+            --accent-color: #0275d8;
+            --accent-hover: #025aa5;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f0f8ff;
+            background-image: url("img/background_sprint.png");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: var(--text-primary);
+            font-family: 'Play', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+
+        .error-container {
+            max-width: 600px;
+            width: 90%;
+            max-height: 85vh;
+            /* Strict height limit */
+            overflow-y: auto;
+            /* Allow scrolling if absolutely needed */
+            padding: 35px;
+            /* Goldilocks padding */
+            position: relative;
+            z-index: 2;
+            margin: 20px;
+
+            /* Glassmorphism */
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 25px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+
+            /* Hide Scrollbar */
+            scrollbar-width: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .error-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .error-icon {
+            font-size: 4rem;
+            /* Balanced size */
+            margin-bottom: 10px;
+            animation: bounce 2s infinite;
+        }
+
+        .error-code {
+            font-size: 5.5rem;
+            /* Balanced size */
+            font-weight: 900;
+            line-height: 1;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+            text-shadow: 2px 4px 5px rgba(0, 0, 0, 0.2);
+            animation: pulse 3s infinite ease-in-out;
+        }
+
+        .error-title {
+            font-size: 2rem;
+            /* Standard title size */
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .error-message {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 25px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.5;
+        }
+
+        .equation {
+            font-family: 'Play', sans-serif;
+            font-size: 1.3rem;
+            background: rgba(2, 117, 216, 0.1);
+            color: var(--primary-color);
+            padding: 10px 25px;
+            border-radius: 50px;
+            display: inline-block;
+            margin-bottom: 20px;
+            border: 1px solid rgba(2, 117, 216, 0.2);
+        }
+
+        .btn-home {
+            background: var(--primary-color);
+            color: white;
+            padding: 14px 35px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s;
+            border: none;
+            font-family: 'Play', sans-serif;
+            font-size: 1.1rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-home:hover {
+            transform: translateY(-2px);
+            background: var(--accent-hover);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            color: white;
+        }
+
+        /* Removed bg-shapes */
+        .bg-shape {
+            display: none;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* Flexbox Footer for robust wrapping */
+        .footer-simple {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            /* Space between text and authors */
+            margin-top: 25px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .footer-simple a {
+            color: var(--accent-hover);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .footer-simple a:hover {
+            text-decoration: underline;
+        }
+
+        /* Mobile Optimization */
+        @media (max-width: 600px) {
+            .error-container {
+                padding: 25px;
+                width: 95%;
+            }
+
+            .error-icon {
+                font-size: 3.5rem;
+            }
+
+            .error-code {
+                font-size: 4.5rem;
+            }
+
+            .error-title {
+                font-size: 1.8rem;
+            }
+
+            .error-message {
+                font-size: 0.95rem;
+            }
+
+            .btn-home {
+                padding: 12px 30px;
+            }
+
+            /* Force column stack on mobile */
+            .footer-simple {
+                flex-direction: column;
+                gap: 2px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-shape shape-1"></div>
+    <div class="bg-shape shape-2"></div>
+
+    <div class="error-container">
+        <div class="error-icon">🏃🏻‍♂️</div>
+        <div class="error-code">404</div>
+        <div class="error-title">Equation Not Found</div>
+        <div class="equation">404 + ? = Page</div>
+        <p class="error-message">
+            <strong>Error:</strong> This equation does not compute! The answer you're looking for isn't on this page.
+            <br><br>
+            Sprint back to the game and solve some real equations!
+        </p>
+        <a href="index.html" class="btn-home">
+            <i class="fas fa-calculator"></i> Return to Game
+        </a>
+
+        <div class="footer-simple">
+            <span>2026 &copy; All Rights Reserved | Designed and Developed by </span>
+            <span class="authors-block">
+                Ashwini Jaiswal & Sharmishtha Khairmode
+            </span>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('contextmenu', e => e.preventDefault());
+        document.addEventListener('selectstart', e => e.preventDefault());
+    </script>
+</body>
+
+</html>

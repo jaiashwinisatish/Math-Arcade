@@ -1,0 +1,68 @@
+{
+    "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
+    "@type": "SoftwareSourceCode",
+    "name": "MATH-SPRINT-GAME",
+    "description": "A time-constrained educational web application designed to test and improve arithmetic speed and accuracy.",
+    "identifier": "MATH-SPRINT-GAME",
+    "license": "https://spdx.org/licenses/MIT.html",
+    "programmingLanguage": [
+        "HTML",
+        "CSS",
+        "JavaScript"
+    ],
+    "author": [
+        {
+            "@type": "Person",
+            "givenName": "Ashwini",
+            "familyName": "Jaiswal",
+            "affiliation": {
+                "@type": "Organization",
+                "name": "Terna Engineering College"
+            }
+        },
+        {
+            "@type": "Person",
+            "givenName": "Sharmishtha",
+            "familyName": "Khairmode",
+            "affiliation": {
+                "@type": "Organization",
+                "name": "Terna Engineering College"
+            }
+        }
+    ],
+    "dateCreated": "2026-02-17",
+    "dateReleased": "2026-02-17",
+    "codeRepository": "https://github.com/Amey-Thakur/MATH-SPRINT-GAME",
+    "isPartOf": "https://github.com/Amey-Thakur/COMPUTER-ENGINEERING",
+    "developmentStatus": "complete",
+    "applicationCategory": "Educational Game",
+    "keywords": [
+        "Math Game",
+        "Sprint",
+        "Arithmetic",
+        "Terna Engineering College",
+        "Computer Engineering",
+        "Computer Science",
+        "CSS",
+        "Educational Game",
+        "Engineering",
+        "Game",
+        "HMI",
+        "HTML",
+        "Human Machine Interaction",
+        "JavaScript",
+        "Math Sprint Game",
+        "Mental Math",
+        "Responsive UI",
+        "University Of Mumbai",
+        "University of Mumbai",
+        "Mumbai University",
+        "Navi Mumbai",
+        "India",
+        "B.E. Computer Engineering",
+        "Semester VIII",
+        "Ashwini Jaiswal",
+        "Sharmishtha Khairmode"
+    ],
+    "url": "https://amey-thakur.github.io/MATH-SPRINT-GAME/"
+}

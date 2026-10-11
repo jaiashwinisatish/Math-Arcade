@@ -1,0 +1,15 @@
+cff-version: 1.2.0
+message: "If you use this Computer Engineering project or its associated academic materials, please cite them as below."
+authors:
+- family-names: "Jaiswal"
+  given-names: "Ashwini"
+- family-names: "Khairmode"
+  given-names: "Sharmishtha"
+title: "MATH-SPRINT-GAME"
+version: 1.0.0
+date-released: 2026-02-17
+url: "https://github.com/Amey-Thakur/MATH-SPRINT-GAME"
+identifiers:
+  - type: other
+    value: "2026-02-17"
+    description: "Date this repository was created on GitHub."

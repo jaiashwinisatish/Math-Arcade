@@ -1,0 +1,31 @@
+# Math Sprint Game
+
+> A fast-paced educational web game where players race against time to solve
+> math equations, testing speed and accuracy.
+
+Author: Ashwini Jaiswal
+Co-author: Sharmishtha Khairmode
+Institution: Terna Engineering College, University of Mumbai
+Programme: B.E. Computer Engineering, Fourth Year, Semester VIII
+Licence: CC BY 4.0, attribution required
+Repository created: 17 February 2026
+
+## What is in this repository
+
+- Source Code, 12 files
+- docs, 1 file
+- screenshots, 7 files
+
+## Subject terms
+
+computer-engineering, computer-science, css, educational-game, engineering,
+game, hmi, html, human-machine-interaction, javascript, math-game,
+math-sprint-game, mental-math, responsive-ui, university-of-mumbai
+
+## Where this sits
+
+- This repository: https://github.com/Amey-Thakur/MATH-SPRINT-GAME
+- Degree index, every subject and project: https://github.com/Amey-Thakur/COMPUTER-ENGINEERING
+- Project page: https://amey-thakur.github.io/MATH-SPRINT-GAME/
+- Authors: Ashwini Jaiswal and Sharmishtha Khairmode
+- Research notes and reflections: https://amey-thakur.github.io/
