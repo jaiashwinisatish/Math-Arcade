@@ -5,7 +5,7 @@
   [![License: MIT](https://img.shields.io/badge/License-MIT-lightgrey)](LICENSE)
   ![Status](https://img.shields.io/badge/Status-Completed-2EA043)
   [![Technology](https://img.shields.io/badge/Technology-HTML5%20%7C%20JavaScript-8250DF)](https://github.com/Amey-Thakur/MATH-SPRINT-GAME)
-  [![Developed by Ashwini Jaiswal and Sharmishtha Khairmode](https://img.shields.io/badge/Developed%20by-Ashwini%20Jaiswal%20%26%20Sharmishtha%20Khairmode-0969DA.svg)](https://github.com/Amey-Thakur/MATH-SPRINT-GAME)
+  [![Developed by Ashwini Jaiswal and Sharmishtha Khairmode](https://img.shields.io/badge/Developed%20by-Ashwini%20Jaiswal%20%26%20Sharmishtha%20Khairmode-0969DA.svg)](https://github.com/jaiashwinisatish/Math-Arcade))
 
   A fast-paced educational web game where players race against time to solve math equations, testing speed and accuracy.
 
